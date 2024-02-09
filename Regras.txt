@@ -1,0 +1,63 @@
+Criar API para plataforma de salvar consulta
+Cadastro
+Login
+
+Preciso
+Nome da consulta
+Procedimentos realizados
+Dia da consulta
+Data que vai ser cobrado a consulta: 3 meses
+Status NÃO COBRADA E COBRADA
+
+Lugar para
+Cadastrar consulta
+Editar a consulta
+Remover consulta
+
+Lugar para listar todas as minhas consultas - Detalhe eu so posso ver as minhas consultas
+Tenho que filtar por mês/ ano - > para saber todas as consultas que vao ser cobradas juntas
+
+Tarefa 1 - Criar config inicial do projeto spring.
+Tarefa 2 - Criar o endpoint de cadastro de usuário
+tarefa 3 - criar o endpoint de loggin do usuário
+tarefa 4 - criar o endpoint para cadastrar a consulta
+tarefa 5 - criar endpoint para editar a consulta (OBS: mudar o status da consulta atráves de um clique do usuário)
+tarefa 6 - criar endpoint para deletar a consulta
+tarefa 7 - criar endpoint para listar as minhas consultas (OBS: Eu só posso ver as minhas consultas)
+tarefa 8 - criar endpoint para filtrar minhas consultas com mês e ano(OBS: quero saber todas as minhas consultas que serão cobradas juntas no mês do filtro
+tarefa 9 - configurar banco MongoDB no projeto
+
+
+-------------------------------------------------------------------------------------------------------
+
+Spike: Lembrar de estrutural conforme alguns exemplos abaixo: Pesquisar padrão de software (SOLID, Design Patterns)
+Exemplos de pacotes:
+controller
+service
+repository
+dto: Data Transfer Object (Response e Request)
+entities: Entidades de banco de dados
+model: Entidades usadas dentro do código
+enum: vai usar palavras como padrão
+util
+config
+
+Spike: API Rest/Restfull trazer os conceitos
+
+Spike: Swagger
+
+Spike: Banco de dados mongoDb
+
+------------------------------------------------------------------------------------------------------------
+CWI
+
+Skills Start
+Desmistificando a TI
+Carreiras na área da TI
+
+Skills disponiveis
+Introdução ao desenvolvimento
+Lógica de programação
+Processos
+Qualidade
+
