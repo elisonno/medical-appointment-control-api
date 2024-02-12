@@ -1,7 +1,11 @@
 package doctorsappointments.dto;
 
+import org.springframework.lang.NonNull;
+
 public class LoginRequest {
+    @NonNull
     private String email;
+    @NonNull
     private String password;
 
     public String getEmail() {
