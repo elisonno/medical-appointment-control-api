@@ -3,53 +3,58 @@ package doctorsappointments.service.impl;
 
 import doctorsappointments.dto.LoginRequest;
 import doctorsappointments.dto.LoginResponse;
-import doctorsappointments.dto.SigInRequest;
+import doctorsappointments.dto.SignInRequest;
 import doctorsappointments.entity.User;
 import doctorsappointments.exception.*;
 import doctorsappointments.repository.UserRepository;
 import doctorsappointments.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private final UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
-    public void sigIn(SigInRequest request) throws BadRequestException {
-        User user = findByUser(request.getEmail());
-        user = new User(request.getName(),request.getEmail(),request.getCpf(),request.getDateOfBirth(), request.getPassword());
+    public void signIn(SignInRequest request) throws BadRequestException {
+        verificationUserAlreadyExist(request.getEmail());
+        var user = User.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .cpf(request.getCpf())
+                .dateOfBirth(request.getDateOfBirth())
+                .password(request.getPassword())
+                .build();
         userRepository.save(user);
     }
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) throws NotFoundException, UnauthorizatedException {
-        LoginResponse loginResponse;
-        User user = findByUser(loginRequest.getEmail(), loginRequest.getPassword());
-        loginResponse = new LoginResponse(user);
-        return loginResponse;
+        var user = verificationUserExistAndPasswordIsCorrect(loginRequest.getEmail(), loginRequest.getPassword());
+        return LoginResponse.builder()
+                .name(user.getName())
+                .email(user.getEmail())
+                .cpf(user.getCpf())
+                .dateOfBirth(user.getDateOfBirth())
+                .build();
     }
 
-    private User findByUser(String email) throws BadRequestException {
+    private void verificationUserAlreadyExist(String email) throws BadRequestException {
         User user = userRepository.findByEmail(email);
-        if(user != null){
+        if (user != null) {
             throw new UserAlreadyExist();
         }
-        return user;
     }
 
-    private User findByUser(String email, String password) throws NotFoundException, UnauthorizatedException {
+    private User verificationUserExistAndPasswordIsCorrect(String email, String password) throws NotFoundException, UnauthorizatedException {
         User user = userRepository.findByEmail(email);
-        if(user == null){
+        if (user == null) {
             throw new UserDoesNotExist();
         }
-        if (!user.getPassword().equals(password)){
+        if (!user.getPassword().equals(password)) {
             throw new InvalidPassword();
         }
         return user;

@@ -1,16 +1,16 @@
 package doctorsappointments.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
 
-@Builder
 @Data
-public class LoginResponse {
+public class SignInRequest {
+
     private String name;
     private String email;
     private String cpf;
     private LocalDate dateOfBirth;
+    private String password;
 
 }

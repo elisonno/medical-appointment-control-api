@@ -2,32 +2,31 @@ package doctorsappointments.controller;
 
 import doctorsappointments.dto.LoginRequest;
 import doctorsappointments.dto.LoginResponse;
-import doctorsappointments.dto.SigInRequest;
+import doctorsappointments.dto.SignInRequest;
 import doctorsappointments.exception.BadRequestException;
 import doctorsappointments.exception.NotFoundException;
 import doctorsappointments.exception.UnauthorizatedException;
 import doctorsappointments.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService service;
+    private final UserService service;
 
-    @PostMapping("/sigin")
+    @PostMapping("/signin")
     @ResponseStatus(HttpStatus.CREATED)
-    public void sigIn(@RequestBody SigInRequest request) throws BadRequestException {
-        service.sigIn(request);
+    public void signIn(@RequestBody SignInRequest request) throws BadRequestException {
+        service.signIn(request);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) throws NotFoundException, UnauthorizatedException {
-        return ResponseEntity.ok(service.login(loginRequest));
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) throws NotFoundException, UnauthorizatedException {
+        return service.login(loginRequest);
     }
+
 }
