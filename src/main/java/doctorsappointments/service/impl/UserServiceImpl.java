@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
     public LoginResponse login(LoginRequest loginRequest) throws NotFoundException, UnauthorizatedException {
         var user = verificationUserExistAndPasswordIsCorrect(loginRequest.getEmail(), loginRequest.getPassword());
         return LoginResponse.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
                 .cpf(user.getCpf())
