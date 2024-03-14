@@ -6,6 +6,7 @@ import doctorsappointments.dto.AppointmentResponse;
 import doctorsappointments.entity.Appointment;
 import doctorsappointments.repository.AppointmentRepository;
 import doctorsappointments.service.AppointmentService;
+import doctorsappointments.util.DateUtility;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,8 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .nameMedicalAppontment(actual.getNameMedicalAppontment())
                     .medicalProcedure(actual.getMedicalProcedure())
                     .status(actual.getStatus())
-                    .dateMedicalAppontment(actual.getDateMedicalAppontment())
+                    .dateMedicalAppontment(DateUtility.convertFormat(actual.getDateMedicalAppontment()))
+                    .billingDate(DateUtility.convertFormat(actual.getBillingDate()))
                     .build();
             myappointments.add(actualAppointment);
         }
@@ -49,6 +51,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .medicalProcedure(appointmentRequest.getMedicalProcedure())
                 .status(appointmentRequest.getStatus())
                 .dateMedicalAppontment(LocalDate.now())
+                .billingDate(LocalDate.now().plusMonths(3))
                 .build();
         appointmentRepository.save(appointment);
     }

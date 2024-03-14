@@ -17,15 +17,15 @@ Remover consulta
 Lugar para listar todas as minhas consultas - Detalhe eu so posso ver as minhas consultas
 Tenho que filtar por mês/ ano - > para saber todas as consultas que vao ser cobradas juntas
 
-Tarefa 1 - Criar config inicial do projeto spring.
-Tarefa 2 - Criar o endpoint de cadastro de usuário
-tarefa 3 - criar o endpoint de loggin do usuário
-tarefa 4 - criar o endpoint para cadastrar a consulta
+Tarefa 1 - Criar config inicial do projeto spring. -OK
+Tarefa 2 - Criar o endpoint de cadastro de usuário -OK
+tarefa 3 - criar o endpoint de loggin do usuário - OK
+tarefa 4 - criar o endpoint para cadastrar a consulta - OK
 tarefa 5 - criar endpoint para editar a consulta (OBS: mudar o status da consulta atráves de um clique do usuário)
-tarefa 6 - criar endpoint para deletar a consulta
-tarefa 7 - criar endpoint para listar as minhas consultas (OBS: Eu só posso ver as minhas consultas)
+tarefa 6 - criar endpoint para deletar a consulta (deleção lógica)
+tarefa 7 - criar endpoint para listar as minhas consultas (OBS: Eu só posso ver as minhas consultas) - OK
 tarefa 8 - criar endpoint para filtrar minhas consultas com mês e ano(OBS: quero saber todas as minhas consultas que serão cobradas juntas no mês do filtro
-tarefa 9 - configurar banco MongoDB no projeto
+tarefa 9 - configurar banco MongoDB no projeto - OK
 
 
 -------------------------------------------------------------------------------------------------------

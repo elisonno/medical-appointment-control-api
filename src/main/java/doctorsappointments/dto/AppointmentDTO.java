@@ -13,5 +13,6 @@ public class AppointmentDTO {
     private String nameMedicalAppontment;
     private List<String> medicalProcedure;
     private StatusEnum status;
-    private LocalDate dateMedicalAppontment;
+    private String dateMedicalAppontment;
+    private String billingDate;
 }

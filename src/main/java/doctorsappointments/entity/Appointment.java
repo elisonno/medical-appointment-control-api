@@ -23,5 +23,6 @@ public class Appointment {
     private List<String> medicalProcedure;
     private StatusEnum status;
     private LocalDate dateMedicalAppontment;
+    private LocalDate billingDate;
 
 }
