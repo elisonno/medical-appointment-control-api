@@ -12,6 +12,8 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +23,31 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
 
+    @Override
+    public AppointmentResponse myAppointments(ObjectId userId, int month, int year) {
+        var appointments = listMedicalAppointments(userId);
+        List<AppointmentDTO> myAppointments = new ArrayList<>();
+        for (Appointment actual : appointments) {
+            if((actual.getBillingDate().getMonthValue() == month) && (actual.getBillingDate().getYear() == year)) {
+                var actualAppointment = AppointmentDTO.builder()
+                        .nameMedicalAppontment(actual.getNameMedicalAppontment())
+                        .medicalProcedure(actual.getMedicalProcedure())
+                        .status(actual.getStatus())
+                        .dateMedicalAppontment(DateUtility.convertFormat(actual.getDateMedicalAppontment()))
+                        .billingDate(DateUtility.convertFormat(actual.getBillingDate()))
+                        .build();
+                myAppointments.add(actualAppointment);
+            }
+        }
+        return AppointmentResponse.builder()
+                .appointments(myAppointments)
+                .build();
+    }
 
     @Override
     public AppointmentResponse appointments(ObjectId userId) {
         var appointments = listMedicalAppointments(userId);
-        List<AppointmentDTO> myappointments = new ArrayList<>();
+        List<AppointmentDTO> myAppointments = new ArrayList<>();
         for (Appointment actual : appointments){
             var actualAppointment = AppointmentDTO.builder()
                     .nameMedicalAppontment(actual.getNameMedicalAppontment())
@@ -34,11 +56,11 @@ public class AppointmentServiceImpl implements AppointmentService {
                     .dateMedicalAppontment(DateUtility.convertFormat(actual.getDateMedicalAppontment()))
                     .billingDate(DateUtility.convertFormat(actual.getBillingDate()))
                     .build();
-            myappointments.add(actualAppointment);
+            myAppointments.add(actualAppointment);
         }
 
         return AppointmentResponse.builder()
-                .appointments(myappointments)
+                .appointments(myAppointments)
                 .build();
     }
 
