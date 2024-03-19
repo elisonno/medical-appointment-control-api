@@ -3,7 +3,9 @@ package doctorsappointments.service.impl;
 import doctorsappointments.dto.AppointmentDTO;
 import doctorsappointments.dto.AppointmentRequest;
 import doctorsappointments.dto.AppointmentResponse;
+import doctorsappointments.dto.UpdateRequest;
 import doctorsappointments.entity.Appointment;
+import doctorsappointments.enums.StatusEnum;
 import doctorsappointments.repository.AppointmentRepository;
 import doctorsappointments.service.AppointmentService;
 import doctorsappointments.util.DateUtility;
@@ -24,11 +26,22 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
 
     @Override
+    public void changingMedicalAppointmentStatus(UpdateRequest updateRequest) {
+        var appointment = appointmentRepository.findById(updateRequest.getAppointmentId());
+        if (StatusEnum.CHARGED.equals(appointment.getStatus())) {
+            appointment.setStatus(StatusEnum.NOT_CHARGED);
+        } else {
+            appointment.setStatus(StatusEnum.CHARGED);
+        }
+        appointmentRepository.save(appointment);
+    }
+
+    @Override
     public AppointmentResponse myAppointments(ObjectId userId, int month, int year) {
         var appointments = listMedicalAppointments(userId);
         List<AppointmentDTO> myAppointments = new ArrayList<>();
         for (Appointment actual : appointments) {
-            if((actual.getBillingDate().getMonthValue() == month) && (actual.getBillingDate().getYear() == year)) {
+            if ((actual.getBillingDate().getMonthValue() == month) && (actual.getBillingDate().getYear() == year)) {
                 var actualAppointment = AppointmentDTO.builder()
                         .nameMedicalAppontment(actual.getNameMedicalAppontment())
                         .medicalProcedure(actual.getMedicalProcedure())
@@ -48,7 +61,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentResponse appointments(ObjectId userId) {
         var appointments = listMedicalAppointments(userId);
         List<AppointmentDTO> myAppointments = new ArrayList<>();
-        for (Appointment actual : appointments){
+        for (Appointment actual : appointments) {
             var actualAppointment = AppointmentDTO.builder()
                     .nameMedicalAppontment(actual.getNameMedicalAppontment())
                     .medicalProcedure(actual.getMedicalProcedure())
@@ -78,7 +91,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentRepository.save(appointment);
     }
 
-    private List<Appointment> listMedicalAppointments (ObjectId userId){
+    private List<Appointment> listMedicalAppointments(ObjectId userId) {
         return appointmentRepository.findByUserId(userId);
     }
 
