@@ -12,6 +12,8 @@ import java.time.Year;
 
 public interface AppointmentService {
 
+    void deleteAppointment(ObjectId appointmentId);
+
     AppointmentResponse appointments(ObjectId userId);
 
     AppointmentResponse myAppointments(ObjectId userId, int month, int year);

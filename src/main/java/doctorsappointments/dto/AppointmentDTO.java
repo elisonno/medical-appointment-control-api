@@ -1,10 +1,9 @@
 package doctorsappointments.dto;
 
-import doctorsappointments.enums.StatusEnum;
+import doctorsappointments.enums.BillingStatusEnum;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -12,7 +11,7 @@ import java.util.List;
 public class AppointmentDTO {
     private String nameMedicalAppontment;
     private List<String> medicalProcedure;
-    private StatusEnum status;
+    private BillingStatusEnum status;
     private String dateMedicalAppontment;
     private String billingDate;
 }

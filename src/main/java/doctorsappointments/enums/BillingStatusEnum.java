@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum StatusEnum {
-    ACTIVE,
-    NOT_ACTIVE
+public enum BillingStatusEnum {
+    CHARGED,
+    NOT_CHARGED
 }

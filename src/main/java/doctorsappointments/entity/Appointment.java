@@ -1,6 +1,7 @@
 package doctorsappointments.entity;
 
 
+import doctorsappointments.enums.BillingStatusEnum;
 import doctorsappointments.enums.StatusEnum;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Appointment {
     private ObjectId userId;
     private String nameMedicalAppontment;
     private List<String> medicalProcedure;
+    private BillingStatusEnum billingStatus;
     private StatusEnum status;
     private LocalDate dateMedicalAppontment;
     private LocalDate billingDate;

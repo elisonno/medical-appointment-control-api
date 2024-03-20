@@ -36,4 +36,9 @@ public class AppointmentController {
         appointmentService.changingMedicalAppointmentStatus(updateRequest);
     }
 
+    @DeleteMapping("/my/{appointmentId}")
+    public void deleteAppointment(@PathVariable ObjectId appointmentId){
+        appointmentService.deleteAppointment(appointmentId);
+    }
+
 }
